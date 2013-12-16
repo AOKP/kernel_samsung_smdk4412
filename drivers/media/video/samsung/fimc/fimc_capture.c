@@ -1927,6 +1927,8 @@ int fimc_reqbufs_capture_mmap(void *fh, struct v4l2_requestbuffers *b)
 	case V4L2_PIX_FMT_YVYU:		/* fall through */
 	case V4L2_PIX_FMT_NV16:		/* fall through */
 	case V4L2_PIX_FMT_NV61:		/* fall through */
+		fimc_err("%s : w %d h %d \n",__func__,
+				cap->fmt.width, cap->fmt.height);
 		fimc_info1("%s : 1plane\n", __func__);
 		ret = fimc_alloc_buffers(ctrl, 1,
 			cap->fmt.width * cap->fmt.height, SZ_4K, bpp, cap->pktdata_enable, cap->pktdata_size);
@@ -1940,6 +1942,7 @@ int fimc_reqbufs_capture_mmap(void *fh, struct v4l2_requestbuffers *b)
 		break;
 
 	case V4L2_PIX_FMT_NV12:
+	        
 		fimc_info1("%s : 2plane for NV12\n", __func__);
 		ret = fimc_alloc_buffers(ctrl, 2,
 			cap->fmt.width * cap->fmt.height, SZ_64K, bpp, cap->pktdata_enable, cap->pktdata_size);
